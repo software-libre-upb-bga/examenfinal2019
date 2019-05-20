@@ -1,0 +1,12 @@
+* Nombres, IDs, nombre del módulo desplegado.
+Clima:
+Ana Hernández 000323505
+Hameth Assaf 000324747
+Andrea Claro 000127561
+
+* Enlace al repo y rama.
+https://github.com/software-libre-upb-bga/examenfinal2019.git
+Rama: Ana_Hameth_Andrea
+
+* Enlace al servicio desplegado en AWS.
+Enlace: http://ec2-3-208-88-146.compute-1.amazonaws.com/
