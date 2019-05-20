@@ -1,35 +1,33 @@
 var express = require('express');
+var request = require('request');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var _ = require('underscore');
-var async = require('async');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
-var e = new Motor;
 
 var app = express();
 
 // view motor setup
 app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+module.exports = app;
 
-app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.route('/').get(function (arg, res, next) {
-    
+    request('https://uinames.com/api/', function (err, body) {
+        res.render('index', {
+            personas: JSON.parse(body.body)
+        });
+    })
 });
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     res.status(404);
-    res.render('error', {url: req.url});
-
 });
-
