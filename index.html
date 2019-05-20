@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UPB</title>
+</head>
+<body>
+  <h1> Oswaldo Andrés Angarita León_Andres Felipe Herrera Jerez </h1>
+  <img src="upb.png">
+  <div class="info">
+    <p> Coloque la palabra clave para genera gif aleatorio! </p>
+      <form class="gif-form">
+        <input type="text" id="form-value" class="search-input-rounded">
+        <button type="submit" class="search_button"> Search for GIFs </button>
+        <input type="reset" id="reset_button" value="Reset">
+      </form>
+      <div class="rando_facts animated bounceIn">
+        <img id="here_is_gif" src=""/>
+      </div>
+  </div>
+
+  <!-- Link in jQuery from CDN -->
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <!-- My JavaScript -->
+  <script type="text/javascript">
+
+
+    $( document ).ready(function(){
+
+
+      $('.search_button').on('click', function(){
+
+        // Collect user by grabbing the input form's value via id (#)
+        var userInput = $('#form-value').val().trim();
+        
+        // Change the input to suit the API (ie change spaces to +)
+        userInput = userInput.replace(/ /g, "+");
+
+        // Create the Giphy API URL
+        var queryURL = 'http://api.giphy.com/v1/gifs/search?q=' + userInput + '&api_key=ihDboganQ5y2uzYM97H3nkU1aWEYcyNf';
+
+    
+        $.ajax({url: queryURL, method: 'GET'}).done(function(response){
+
+        
+          console.log(response.data);
+
+          
+          var giphyURL = response.data[Math.floor((Math.random() * 20) + 1)].images.fixed_height.url;
+          console.log(giphyURL)
+
+      
+          $('#here_is_gif').attr('src', giphyURL);
+
+        });
+
+   
+        $('#reset_button').on('click', function(){
+      
+          $('#here_is_gif').attr("src",'');
+        })
+
+
+
+        return false;
+      })
+      
+
+    });
+
+  </script>
+
+</body>
+</html>
